@@ -900,7 +900,7 @@ div#mCSB_1_container{
     font-size: 24px;
     z-index: 99;
     color: #fff;
-    background: linear-gradient(267deg, #E770C1 11.27%, #9F70FD 88.73%);
+    background: linear-gradient(267deg, #1D1616 11.27%, #8E1616 88.73%);
     border: 1px solid var(--theme-color);
     border-radius: 50%;
     text-align: center;
@@ -918,7 +918,7 @@ div#mCSB_1_container{
     z-index: -1;
     transform: scale(0.0);
     border-radius: 50%;
-    background: linear-gradient(267deg, #9F70FD 11.27%, #E770C1 88.73%);
+    background: linear-gradient(267deg, #1D1616 11.27%, #8E1616 88.73%);
     transition: all 900ms ease;
     -moz-transition: all 900ms ease;
     -webkit-transition: all 900ms ease;

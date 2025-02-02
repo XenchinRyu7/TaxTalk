@@ -1,7 +1,7 @@
 :root{
     --primary-color: #0D0D0D;
-    --secondary-color: #E770C1;
-    --theme-color: #9F70FD;
+    --secondary-color: #1D1616;
+    --theme-color: #8E1616;
     --primary-font: 'Urbanist', sans-serif;
     --secondary-font: 'Inter', sans-serif;
 }
@@ -183,7 +183,7 @@ img {
     overflow: hidden;
     padding: 10px 25px 10px 25px;
     font-family: var(--primary-font);
-    background: linear-gradient(106deg, #E770C1 11.27%, #9F70FD 88.73%);
+    background: linear-gradient(106deg, #1D1616 11.27%, #8E1616 88.73%);
     transition: all 900ms ease;
     -moz-transition: all 900ms ease;
     -webkit-transition: all 900ms ease;
@@ -198,7 +198,7 @@ img {
     height: 100%;
     content: '';
     z-index: -1;
-    background: linear-gradient(275deg, #E770C1 11.27%, #9F70FD 88.73%);
+    background: linear-gradient(275deg, #1D1616 11.27%, #8E1616 88.73%);
     transition: all 900ms ease;
     -moz-transition: all 900ms ease;
     -webkit-transition: all 900ms ease;
@@ -227,7 +227,7 @@ img {
     z-index: 1;
     overflow: hidden;
     background: transparent;
-    border: 1px solid #E871C2;
+    border: 1px solid #1D1616;
     transition: all 900ms ease;
     -moz-transition: all 900ms ease;
     -webkit-transition: all 900ms ease;
@@ -236,7 +236,7 @@ img {
 }
 .btn_style_two span{
     border-radius: 60px;
-    background: linear-gradient(106deg, #E770C1 11.27%, #9F70FD 88.73%);    
+    background: linear-gradient(106deg, #1D1616 11.27%, #8E1616 88.73%);    
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -249,7 +249,7 @@ img {
     height: 0%;
     content: '';
     z-index: -1;
-    background: linear-gradient(106deg, #E770C1 11.27%, #9F70FD 88.73%);
+    background: linear-gradient(106deg, #1D1616 11.27%, #8E1616 88.73%);
     transition: all 900ms ease;
     -moz-transition: all 900ms ease;
     -webkit-transition: all 900ms ease;
@@ -366,7 +366,7 @@ img {
     left: 0;
     top: 0;
     width: 100%;
-    background: linear-gradient(111deg, #E770C1 19.42%, #9F70FD 73.08%);
+    background: linear-gradient(111deg, #1D1616 19.42%, #8E1616 73.08%);
     z-index: 9999999;
 }  
 .preloader-close{
@@ -504,7 +504,7 @@ img {
     -o-transition: all 900ms ease;
 }
 .social-links li a:hover{
-    border-color: #E770C1;
+    border-color: #1D1616;
 }
 .social-links li a i{
     font-size: 24px;
@@ -519,7 +519,7 @@ img {
 .social-links li a:hover i{
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent;
-    background: -webkit-linear-gradient(-45deg, #E770C1, #7a2d9e 100%);
+    background: -webkit-linear-gradient(-45deg, #1D1616, #7a2d9e 100%);
 }
 .mb_30{
     margin-bottom: 30px;
@@ -561,7 +561,7 @@ img {
     letter-spacing: 0.35px;
     font-family: var(--primary-font);
     text-transform: uppercase;
-    background: linear-gradient(111deg, #E770C1 19.42%, #9F70FD 73.08%);
+    background: linear-gradient(111deg, #1D1616 19.42%, #8E1616 73.08%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -610,7 +610,7 @@ img {
     height: 22px;
     text-align: center;
     border-radius: 50%;
-    border-color: #9F70FD;
+    border-color: #8E1616;
     background: #ffffff;
 }
 .owl-theme.owl-dots-one .owl-dot:before{
@@ -622,7 +622,7 @@ img {
     content: '';
     text-align: center;
     border-radius: 50%;
-    background-color: #9F70FD;
+    background-color: #8E1616;
     visibility: hidden;
 }
 .owl-theme.owl-dots-one .owl-dot.active:before{
@@ -697,5 +697,5 @@ img {
 .pagination li span:hover, 
 .pagination li span.current{
 	color: #ffffff;
-    background: linear-gradient(106deg, #E770C1 11.27%, #9F70FD 88.73%);
+    background: linear-gradient(106deg, #1D1616 11.27%, #8E1616 88.73%);
 }
