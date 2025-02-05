@@ -124,7 +124,13 @@
                             <div class="collapse navbar-collapse show" id="navbarSupportedContent">
                                 <ul class="navigation">
                                     <li><a href="index.html">Home</a></li>
-                                    <li class="active"><a href="simulation.html">Simulasi</a></li>
+                                    <li class="dropdown active"><a href="simulation.html">Fitur</a>
+                                        <ul>
+                                            <li><a href="simulation.html">Simulasi</a></li>
+                                            <li><a href="quiz.html">Quiz</a></li>
+                                            <li><a href="pajaktube.html">PajakTube</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="blog-grid.html">Artikel</a> </li>
                                     <li><a href="contact.html">Contact Us</a></li>
@@ -196,15 +202,17 @@
 
     </header>
     <div class="m-5">
-        <h2 class="text-center mb-4">Simulasi Pajak Pertambahan Nilai (PPN)</h2>
-        <form id="ppn-form">
-            <div class="mb-3">
-                <label for="harga" class="form-label">Harga Barang/Jasa (Rp)</label>
-                <input type="number" class="form-control" id="harga" placeholder="Masukkan harga barang/jasa" required>
+        <h2 class="text-center mb-4">Taxflix - Video Edukasi Pajak</h2>
+        <section class="blog_section">
+            <div class="row" id="video-container">
+                <!-- Video akan dimuat di sini dengan JavaScript -->
             </div>
-            <button type="button" class="btn" onclick="hitungPPN()">Hitung PPN</button>
-        </form>
-        <h3 class="mt-4">Hasil: <span id="hasil-ppn">-</span></h3>
+        </section>
+        <div class="pagination-wrapper text-center mt-4">
+            <button class="btn btn-primary" id="prevPage">Sebelumnya</button>
+            <span id="pageNumber" class="mx-3">1</span>
+            <button class="btn btn-primary" id="nextPage">Berikutnya</button>
+        </div>
     </div>
     <footer class="main_footer">
         <div class="footer_top">
@@ -246,15 +254,58 @@
 
     <!-- Include Js -->
     <script>
-        function hitungPPN() {
-            let harga = parseFloat(document.getElementById('harga').value);
-            let tarifPPN = 0.11; // Tarif PPN 11%
+        const videos = [
+            { id: "VIDEO_ID1", title: "Pentingnya Pajak bagi Pembangunan Negara", category: "Pajak" },
+            { id: "VIDEO_ID2", title: "Perubahan Aturan Pajak 2025 yang Wajib Diketahui", category: "Peraturan Pajak" },
+            { id: "VIDEO_ID3", title: "Cara Mudah Menghitung Pajak Penghasilan", category: "Tips Pajak" },
+            { id: "VIDEO_ID4", title: "Manfaat Pajak untuk Masyarakat", category: "Pajak" },
+            { id: "VIDEO_ID5", title: "Langkah-Langkah Mengurus NPWP", category: "Peraturan Pajak" },
+            { id: "VIDEO_ID6", title: "Strategi Efektif dalam Perencanaan Pajak", category: "Tips Pajak" }
+        ];
+        
+        let currentPage = 1;
+        const itemsPerPage = 3;
 
-            let pajak = harga * tarifPPN;
-            let totalHarga = harga + pajak;
-
-            document.getElementById('hasil-ppn').innerText = "PPN: Rp " + pajak.toLocaleString('id-ID') + " | Total Harga: Rp " + totalHarga.toLocaleString('id-ID');
+        function renderVideos() {
+            const container = document.getElementById("video-container");
+            container.innerHTML = "";
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            
+            videos.slice(start, end).forEach(video => {
+                container.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="news_block_one">
+                            <div class="inner_box">
+                                <figure class="image_box">
+                                    <iframe width="100%" height="200" src="https://www.youtube.com/embed/${video.id}" frameborder="0" allowfullscreen></iframe>
+                                </figure>
+                                <div class="lower_content">
+                                    <div class="category"><span>${video.category}</span></div>
+                                    <h3><a href="#">${video.title}</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+            document.getElementById("pageNumber").textContent = currentPage;
         }
+
+        document.getElementById("prevPage").addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderVideos();
+            }
+        });
+
+        document.getElementById("nextPage").addEventListener("click", () => {
+            if (currentPage * itemsPerPage < videos.length) {
+                currentPage++;
+                renderVideos();
+            }
+        });
+
+        renderVideos();
     </script>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/jquery.js"></script>

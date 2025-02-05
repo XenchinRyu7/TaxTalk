@@ -1,5 +1,6 @@
 .banner_style_one {
     position: relative;
+    background: #E8F0F2;
 }
 
 .banner_style_one .shape_one {
@@ -26,7 +27,7 @@
 .banner_style_one .banner_content {
     position: relative;
     text-align: center;
-    margin-top: 85px;
+    /* margin-top: 85px; */
 }
 
 .banner_style_one .banner_content .tag_text {
@@ -1816,13 +1817,26 @@
 }
 
 .service_block_one {
-    position: relative;
-    padding: 50px 30px 40px;
-    border-radius: 10px;
-    background: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     text-align: center;
-    margin-bottom: 30px;
-    box-shadow: 0px 10px 60px 0px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.service_icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #8e0e00, #1f1c18);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
 }
 
 .service_block_one .service_icon {
@@ -1872,6 +1886,7 @@
     font-weight: 400;
     line-height: 26px;
     margin-bottom: 22px;
+    flex-grow: 1;
 }
 
 .service_block_one .link_btn a {
@@ -2305,6 +2320,7 @@
     padding: 40px 40px 50px;
     margin-bottom: 60px;
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.03);
+    max-height: 300px;
 }
 
 .testimonial_section.inner_page {
@@ -3203,7 +3219,7 @@
     position: relative;
     z-index: 1;
     padding: 180px 0px 100px;
-    background: linear-gradient(111deg, #1D1616 19.42%, #8E1616 73.08%);
+    background: #F5F1FF;
 }
 
 .page_breadcrumb_shape_one {
@@ -6122,4 +6138,9 @@ h3.widget_title {
     background: #f1f1f1;
     color: black;
     align-self: flex-start;
+}
+
+.btn {
+    background: linear-gradient(111deg, #1D1616 19.42%, #8E1616 73.08%);
+    color: white;
 }

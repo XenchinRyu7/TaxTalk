@@ -196,15 +196,13 @@
 
     </header>
     <div class="m-5">
-        <h2 class="text-center mb-4">Simulasi Pajak Pertambahan Nilai (PPN)</h2>
-        <form id="ppn-form">
-            <div class="mb-3">
-                <label for="harga" class="form-label">Harga Barang/Jasa (Rp)</label>
-                <input type="number" class="form-control" id="harga" placeholder="Masukkan harga barang/jasa" required>
-            </div>
-            <button type="button" class="btn" onclick="hitungPPN()">Hitung PPN</button>
-        </form>
-        <h3 class="mt-4">Hasil: <span id="hasil-ppn">-</span></h3>
+        <h2 class="text-center mb-4">Quiz Pajak</h2>
+        <div id="quiz-container" class="text-center">
+            <p id="question-text"></p>
+            <div id="options" class="d-grid gap-2 col-6 mx-auto"></div>
+            <button class="btn btn-secondary mt-3" onclick="nextQuestion()">Soal Berikutnya</button>
+        </div>
+        <h3 class="mt-4 text-center" id="score" style="display: none;"></h3>
     </div>
     <footer class="main_footer">
         <div class="footer_top">
@@ -246,16 +244,63 @@
 
     <!-- Include Js -->
     <script>
-        function hitungPPN() {
-            let harga = parseFloat(document.getElementById('harga').value);
-            let tarifPPN = 0.11; // Tarif PPN 11%
+        const questions = [
+            {
+                question: "Apa kepanjangan dari PPh?",
+                options: ["Pajak Penghasilan", "Pajak Perusahaan Harian", "Pendapatan Per Hari"],
+                answer: "Pajak Penghasilan"
+            },
+            {
+                question: "Berapa tarif PPN di Indonesia saat ini?",
+                options: ["10%", "11%", "12%"],
+                answer: "11%"
+            },
+            {
+                question: "Siapa yang berkewajiban membayar PPh 21?",
+                options: ["Karyawan", "Perusahaan", "Pemerintah"],
+                answer: "Karyawan"
+            }
+        ];
 
-            let pajak = harga * tarifPPN;
-            let totalHarga = harga + pajak;
+        let currentQuestionIndex = 0;
+        let score = 0;
 
-            document.getElementById('hasil-ppn').innerText = "PPN: Rp " + pajak.toLocaleString('id-ID') + " | Total Harga: Rp " + totalHarga.toLocaleString('id-ID');
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                document.getElementById("quiz-container").style.display = "none";
+                document.getElementById("score").innerText = `Skor Anda: ${score} dari ${questions.length}`;
+                document.getElementById("score").style.display = "block";
+                return;
+            }
+
+            const questionData = questions[currentQuestionIndex];
+            document.getElementById("question-text").innerText = questionData.question;
+            const optionsContainer = document.getElementById("options");
+            optionsContainer.innerHTML = "";
+
+            questionData.options.forEach(option => {
+                const button = document.createElement("button");
+                button.classList.add("btn", "btn-outline-primary");
+                button.innerText = option;
+                button.onclick = () => checkAnswer(option);
+                optionsContainer.appendChild(button);
+            });
         }
-    </script>
+
+        function checkAnswer(selectedOption) {
+            if (selectedOption === questions[currentQuestionIndex].answer) {
+                score++;
+            }
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            loadQuestion();
+        }
+
+        window.onload = loadQuestion;
+    </script>   
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/appear.js"></script>

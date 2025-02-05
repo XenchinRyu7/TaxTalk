@@ -124,7 +124,13 @@
                             <div class="collapse navbar-collapse show" id="navbarSupportedContent">
                                 <ul class="navigation">
                                     <li><a href="index.html">Home</a></li>
-                                    <li class="active"><a href="simulation.html">Simulasi</a></li>
+                                    <li class="dropdown active"><a href="simulation.html">Fitur</a>
+                                        <ul>
+                                            <li><a href="simulation.html">Simulasi</a></li>
+                                            <li><a href="quiz.html">Quiz</a></li>
+                                            <li><a href="pajaktube.html">PajakTube</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="blog-grid.html">Artikel</a> </li>
                                     <li><a href="contact.html">Contact Us</a></li>
@@ -195,17 +201,13 @@
         <!-- End Mobile Menu -->
 
     </header>
-    <div class="m-5">
-        <h2 class="text-center mb-4">Simulasi Pajak Pertambahan Nilai (PPN)</h2>
-        <form id="ppn-form">
-            <div class="mb-3">
-                <label for="harga" class="form-label">Harga Barang/Jasa (Rp)</label>
-                <input type="number" class="form-control" id="harga" placeholder="Masukkan harga barang/jasa" required>
-            </div>
-            <button type="button" class="btn" onclick="hitungPPN()">Hitung PPN</button>
-        </form>
-        <h3 class="mt-4">Hasil: <span id="hasil-ppn">-</span></h3>
+    <div class="m-5 text-center">
+        <h2 class="mb-4">Selamat Datang di Quiz Pajak</h2>
+        <p>Uji pengetahuan Anda tentang pajak dengan menjawab beberapa pertanyaan.</p>
+        <a href="question.html" class="btn btn-primary">Mulai Quiz</a>
     </div>
+
+
     <footer class="main_footer">
         <div class="footer_top">
             <div class="container text-center d-flex flex-column align-items-center ">
@@ -245,17 +247,6 @@
     <!--End Scroll to Top -->
 
     <!-- Include Js -->
-    <script>
-        function hitungPPN() {
-            let harga = parseFloat(document.getElementById('harga').value);
-            let tarifPPN = 0.11; // Tarif PPN 11%
-
-            let pajak = harga * tarifPPN;
-            let totalHarga = harga + pajak;
-
-            document.getElementById('hasil-ppn').innerText = "PPN: Rp " + pajak.toLocaleString('id-ID') + " | Total Harga: Rp " + totalHarga.toLocaleString('id-ID');
-        }
-    </script>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/appear.js"></script>
