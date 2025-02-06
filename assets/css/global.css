@@ -653,8 +653,8 @@ img {
     -o-transition:all 500ms ease;
 }
 .owl-theme.nav-style-one .owl-nav button:hover{
-    color: #9F70FD;
-    border: 1px solid #9F70FD;
+    color: #8E1616;
+    border: 1px solid #8E1616;
 }
 .owl-theme.nav-style-one .owl-nav button.owl-prev{
     transform: rotate(180deg);

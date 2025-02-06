@@ -33,6 +33,43 @@
         rel="stylesheet">
     <!-- End Google Fonts -->
 
+    <style>
+        /* Warna tombol nomor soal */
+        .quiz-btn {
+            background-color: white;
+            border: 2px solid black;
+            color: black;
+        }
+
+        .quiz-btn.active {
+            background-color:gray;
+            color: white;
+        }
+
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .option-btn {
+            background-color: white;
+            border: 2px solid black;
+            color: black;
+            transition: 0.3s;
+        }
+
+        .option-btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .option-btn.selected-option {
+            background-color: gray;
+            color: white;
+            border-color: black;
+        }
+    </style>
+
 </head>
 
 <body class="boxed_wrapper">
@@ -124,7 +161,13 @@
                             <div class="collapse navbar-collapse show" id="navbarSupportedContent">
                                 <ul class="navigation">
                                     <li><a href="index.html">Home</a></li>
-                                    <li class="active"><a href="simulation.html">Simulasi</a></li>
+                                    <li class="dropdown active"><a href="simulation.html">Fitur</a>
+                                        <ul>
+                                            <li><a href="simulation.html">Simulasi</a></li>
+                                            <li><a href="quiz.html">Quiz</a></li>
+                                            <li><a href="pajaktube.html">PajakTube</a></li>
+                                        </ul>
+                                    </li>
                                     <li><a href="about.html">About Us</a></li>
                                     <li><a href="blog-grid.html">Artikel</a> </li>
                                     <li><a href="contact.html">Contact Us</a></li>
@@ -197,11 +240,46 @@
     </header>
     <div class="m-5">
         <h2 class="text-center mb-4">Quiz Pajak</h2>
-        <div id="quiz-container" class="text-center">
-            <p id="question-text"></p>
-            <div id="options" class="d-grid gap-2 col-6 mx-auto"></div>
-            <button class="btn btn-secondary mt-3" onclick="nextQuestion()">Soal Berikutnya</button>
+
+        <div class="row">
+            <!-- Sidebar Nomor Soal -->
+            <div class="col-md-3">
+                <div class="question-grid">
+                    <!-- Tombol nomor soal -->
+                    <button class="quiz-btn active">1</button>
+                    <button class="quiz-btn">2</button>
+                    <button class="quiz-btn">3</button>
+                    <button class="quiz-btn">4</button>
+                    <button class="quiz-btn">5</button>
+                    <button class="quiz-btn">6</button>
+                    <button class="quiz-btn">7</button>
+                    <button class="quiz-btn">8</button>
+                    <button class="quiz-btn">9</button>
+                    <button class="quiz-btn">10</button>
+                    <button class="quiz-btn">11</button>
+                    <button class="quiz-btn">12</button>
+                    <button class="quiz-btn">13</button>
+                    <button class="quiz-btn">14</button>
+                    <button class="quiz-btn">15</button>
+                    <button class="quiz-btn">16</button>
+                    <button class="quiz-btn">17</button>
+                    <button class="quiz-btn">18</button>
+                    <button class="quiz-btn">19</button>
+                    <button class="quiz-btn">20</button>
+                </div>
+            </div>
+
+            <!-- Konten Soal -->
+            <div class="col-md-9">
+                <div class="card p-4">
+                    <p id="question-text" class="fw-bold">Loading...</p>
+                    <div id="options" class="d-grid gap-2"></div>
+                    <button class="quiz-btn mt-3" id="next-btn" onclick="nextQuestion()" disabled>Soal
+                        Berikutnya</button>
+                </div>
+            </div>
         </div>
+
         <h3 class="mt-4 text-center" id="score" style="display: none;"></h3>
     </div>
     <footer class="main_footer">
@@ -210,7 +288,7 @@
                 <div class="footer_widget about_widget aos-init aos-animate" data-aos="fade-right"
                     data-aos-easing="linear" data-aos-duration="500">
                     <figure class="footer_logo">
-                        <a href="index.html"><img src="assets/images/taxtalk_logo.svg" alt="" width="1000px"
+                        <a href="index.html"><img src="assets/images/taxtalk_logo_white.svg" alt="" width="1000px"
                                 height="1000px"></a>
                     </figure>
                     <p class="text-center">
@@ -229,7 +307,8 @@
         <div class="footer_bottom">
             <div class="container text-center">
                 <div class="copyright">
-                    Copyright &copy; 2025 &nbsp;<a href="index.html">TaxTalk</a>, Inc. All Rights Reserved
+                    Copyright &copy; 2025 &nbsp;<a href="index.html" class="text-white">TaxTalk</a>, Inc. All Rights
+                    Reserved
                 </div>
             </div>
         </div>
@@ -264,6 +343,7 @@
 
         let currentQuestionIndex = 0;
         let score = 0;
+        let userAnswer = null;
 
         function loadQuestion() {
             if (currentQuestionIndex >= questions.length) {
@@ -273,6 +353,9 @@
                 return;
             }
 
+            userAnswer = null; // Reset jawaban user
+            document.getElementById("next-btn").disabled = true;
+
             const questionData = questions[currentQuestionIndex];
             document.getElementById("question-text").innerText = questionData.question;
             const optionsContainer = document.getElementById("options");
@@ -280,27 +363,45 @@
 
             questionData.options.forEach(option => {
                 const button = document.createElement("button");
-                button.classList.add("btn", "btn-outline-primary");
+                button.classList.add("quiz-btn", "option-btn", "text-start");
                 button.innerText = option;
-                button.onclick = () => checkAnswer(option);
+                button.onclick = () => selectAnswer(button, option);
                 optionsContainer.appendChild(button);
             });
+
+            updateQuestionGrid();
         }
 
-        function checkAnswer(selectedOption) {
-            if (selectedOption === questions[currentQuestionIndex].answer) {
-                score++;
-            }
-            nextQuestion();
+        function selectAnswer(button, selectedOption) {
+            // Hapus warna biru dari opsi lain
+            document.querySelectorAll(".option-btn").forEach(btn => btn.classList.remove("selected-option"));
+
+            // Tandai opsi yang dipilih
+            button.classList.add("selected-option");
+            userAnswer = selectedOption;
+            document.getElementById("next-btn").disabled = false; // Aktifkan tombol "Soal Berikutnya"
         }
 
         function nextQuestion() {
+            if (userAnswer === questions[currentQuestionIndex].answer) {
+                score++;
+            }
             currentQuestionIndex++;
             loadQuestion();
         }
 
+        function updateQuestionGrid() {
+            const buttons = document.querySelectorAll(".quiz-btn");
+            buttons.forEach((btn, index) => {
+                btn.classList.remove("active");
+                if (index === currentQuestionIndex) {
+                    btn.classList.add("active");
+                }
+            });
+        }
+
         window.onload = loadQuestion;
-    </script>   
+    </script>
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/jquery.js"></script>
     <script src="assets/js/appear.js"></script>
